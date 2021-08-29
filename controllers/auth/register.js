@@ -41,6 +41,6 @@ export default async function register(req, res) {
 		});
 	} catch (err) {
 		if (process.env.NODE_ENV !== "production") console.log(err);
-		return error(500, err.message);
+		return error(400, err.message);
 	}
 }
