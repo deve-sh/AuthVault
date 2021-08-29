@@ -18,7 +18,6 @@
     "firebase": "^8.8.1",
     "firebase-admin": "^9.11.0",
     "helmet": "^4.6.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.2"
+    "jsonwebtoken": "^8.5.1"
   }
 }
