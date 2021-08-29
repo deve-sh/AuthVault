@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Controller Routers
 import authRouter from "./controllers/auth";
