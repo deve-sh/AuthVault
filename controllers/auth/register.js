@@ -16,15 +16,18 @@ export default async function register(req, res) {
 				"Incomplete information. Mandatory fields: email, password and displayName"
 			);
 
-		const userRecord = await firebaseAdmin.auth().createUser({
+		let userProperties = {
 			email,
 			emailVerified: false,
-			phoneNumber: phoneNumber || "",
 			password,
 			displayName,
-			photoURL: photoURL || "",
 			disabled: false,
-		});
+		};
+
+        if(photoURL) userProperties.photoURL = photoURL;
+        if(phoneNumber) userProperties.phoneNumber = phoneNumber;
+
+		const userRecord = await firebaseAdmin.auth().createUser(userProperties);
 
 		return res.status(201).json({
 			message: "Successfully created user",
