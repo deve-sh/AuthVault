@@ -29,9 +29,15 @@ export default async function register(req, res) {
 
 		const userRecord = await firebaseAdmin.auth().createUser(userProperties);
 
+        let userRecordToSend = { ...userRecord.toJSON() };
+        delete userRecordToSend.metadata;
+        delete userRecordToSend.tokensValidAfterTime;
+        delete userRecordToSend.providerData;
+
 		return res.status(201).json({
 			message: "Successfully created user",
-			user: userRecord.toJSON(),
+            id: userRecordToSend.uid,
+			user: userRecordToSend,
 		});
 	} catch (err) {
 		if (process.env.NODE_ENV !== "production") console.log(err);
