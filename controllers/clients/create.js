@@ -1,7 +1,7 @@
 import firebaseAdmin from "../../firebaseAdmin";
 import { v4 as uuid } from "uuid";
 
-export default async function getToken(req, res) {
+export default async function createOAuthClient(req, res) {
 	const error = (status = 400, message = "") =>
 		res.status(status || 400).json({
 			message: message || "Something went wrong. Please try again later.",
