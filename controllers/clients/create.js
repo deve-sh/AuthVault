@@ -30,6 +30,8 @@ export default async function getToken(req, res) {
 			clientId,
 			clientSecret,
 			nUsers: 0,
+            name,
+            description,
 			createdBy: req.token.uid,
 		});
 
