@@ -1,4 +1,3 @@
-import firebaseAdmin from "../../firebaseAdmin";
 import firebase from "../../firebase";
 
 export default async function getToken(req, res) {
@@ -17,12 +16,12 @@ export default async function getToken(req, res) {
 			);
 
 		await firebase.auth().signInWithEmailAndPassword(email, password);
-		let uid = firebase.auth().currentUser.uid;
+		const token = await firebase.auth().currentUser.getIdToken();
 		await firebase.auth().signOut();
 
 		return res.status(200).json({
 			message: "Successfully fetched token",
-			token: await firebaseAdmin.auth().createCustomToken(uid),
+			token,
 		});
 	} catch (err) {
 		if (process.env.NODE_ENV !== "production") console.log(err);
