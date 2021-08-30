@@ -9,7 +9,7 @@ export default async function getOAuthClient(req, res) {
 	try {
 		if (!req.token || !req.token.uid) return error(401, "Unauthorized");
 
-		let { clientId } = req.body;
+		let { clientId } = req.params;
 
 		if (!clientId)
 			return error(400, "Incomplete information. Mandatory fields: clientId");
