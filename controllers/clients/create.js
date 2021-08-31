@@ -10,13 +10,13 @@ export default async function createOAuthClient(req, res) {
 	try {
 		if (!req.token || !req.token.uid) return error(401, "Unauthorized");
 
-		let { name, description } =
+		let { name, description, homepage, redirectURL } =
 			req.body && req.body.client ? req.body.client : {};
 
-		if (!name || !description)
+		if (!name || !description || !homepage || !redirectURL)
 			return error(
 				400,
-				"Incomplete information. Mandatory fields: name, description"
+				"Incomplete information. Mandatory fields: name, description, homepage, redirectURL"
 			);
 
 		// Generating client IDs and Client Secrets for the OAuth Client
@@ -30,8 +30,10 @@ export default async function createOAuthClient(req, res) {
 			clientId,
 			clientSecret,
 			nUsers: 0,
-            name,
-            description,
+			homepage,
+			redirectURL,
+			name,
+			description,
 			createdBy: req.token.uid,
 		});
 
@@ -40,6 +42,8 @@ export default async function createOAuthClient(req, res) {
 			client: {
 				clientId,
 				clientSecret,
+				homepage,
+				redirectURL,
 			},
 		});
 	} catch (err) {
