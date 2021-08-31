@@ -12,7 +12,7 @@ export default async function getToken(req, res) {
 		if (!email || !password)
 			return error(
 				400,
-				"Incomplete information. Mandatory fields: email, password and displayName"
+				"Incomplete information. Mandatory fields: email, password"
 			);
 
 		await firebase.auth().signInWithEmailAndPassword(email, password);
