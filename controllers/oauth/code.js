@@ -3,7 +3,7 @@ import firebaseAdmin from "../../firebaseAdmin";
 import firebase from "../../firebase";
 import generateJWT from "../../helpers/generateJWT";
 
-export default async function code(req, res) {
+export default async function generateCode(req, res) {
 	const error = (status = 400, message = "") =>
 		res.status(status || 400).json({
 			message: message || "Something went wrong. Please try again later.",
