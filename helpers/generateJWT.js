@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-export default async function generateJWT(
+export default function generateJWT(
 	params = {
 		uid: null,
 	},
