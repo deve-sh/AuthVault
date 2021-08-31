@@ -5,6 +5,7 @@ import helmet from "helmet";
 // Controller Routers
 import authRouter from "./controllers/auth";
 import OAuthClientsRouter from "./controllers/clients";
+import OAuthRouter from "./controllers/oauth";
 
 // Middlewares
 import validateFirebaseToken from "./helpers/validateFirebaseToken";
@@ -17,5 +18,6 @@ app.use(express.json());
 
 app.use("/api/auth", authRouter);
 app.use("/api/clients", validateFirebaseToken, OAuthClientsRouter);
+app.use("/api/oauth", OAuthRouter);
 
 app.listen(process.env.PORT || 8080, () => console.log("App running."));
