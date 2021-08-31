@@ -1,6 +1,6 @@
 import firebaseAdmin from "../../firebaseAdmin";
 
-export default async function getOAuthClient(req, res) {
+export default async function listOAuthClients(req, res) {
 	const error = (status = 400, message = "") =>
 		res.status(status || 400).json({
 			message: message || "Something went wrong. Please try again later.",
