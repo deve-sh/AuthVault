@@ -12,6 +12,12 @@ export default async function generateCode(req, res) {
 	try {
 		let { code, clientId, clientSecret } = req.query;
 
+		if (!code || !clientId || !clientSecret)
+			return error(
+				400,
+				"Incomplete information. Mandatory fields: code, clientId, clientSecret"
+			);
+
 		const client = (
 			await firebaseAdmin
 				.firestore()
@@ -24,12 +30,6 @@ export default async function generateCode(req, res) {
 
 		if (!client || !client.data || !client.data() || !client.data().redirectURL)
 			return error(404, "Client Not Found");
-
-		if (!clientId || !clientSecret)
-			return error(
-				400,
-				"Incomplete information. Mandatory fields: clientId, clientSecret"
-			);
 
 		let decodedCode = verifyJWT(code);
 		if (!decodedCode || !decodedCode.uid)
