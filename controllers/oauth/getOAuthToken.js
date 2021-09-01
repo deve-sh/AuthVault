@@ -37,12 +37,17 @@ export default async function getOAuthToken(req, res) {
 		let user = await firebaseAdmin.auth().getUser(decodedCode.uid);
 		user = user.toJSON();
 
-		const token = generateJWT({
-			uid: decodedCode.uid,
-			email: user.email,
-			displayName: user.displayName,
-			phoneNumber: user.phoneNumber,
-		});
+		const token = generateJWT(
+			{
+				uid: decodedCode.uid,
+				email: user.email,
+				displayName: user.displayName,
+				phoneNumber: user.phoneNumber,
+				clientId,
+			},
+			// Expires 350 days from now. Not handling refresh token cases right now.
+			Math.floor(new Date().getTime() / 1000) + 350 * 1440 * 60
+		);
 
 		return res.status(200).json({
 			message: "OAuth Token Generated",
