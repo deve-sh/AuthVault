@@ -31,7 +31,13 @@ export default async function getUserDetails(req, res) {
 			return error(404, "Client Not Found");
 
 		let decodedToken = verifyJWT(token);
-		if (!decodedToken || !decodedToken.uid) return error(403, "Unauthorized");
+		if (
+			!decodedToken ||
+			!decodedToken.uid ||
+			!decodedToken.clientId ||
+			decodedToken.clientId !== clientId
+		)
+			return error(403, "Unauthorized");
 
 		let user = await firebaseAdmin.auth().getUser(decodedToken.uid);
 		user = user.toJSON();
