@@ -13,6 +13,12 @@ export default async function generateCode(req, res) {
 		let { email, password } = req.body;
 		let { clientId, clientSecret } = req.query;
 
+		if (!email || !password || !clientId || !clientSecret)
+			return error(
+				400,
+				"Incomplete information. Mandatory fields: email, password, clientId, clientSecret"
+			);
+
 		const client = (
 			await firebaseAdmin
 				.firestore()
@@ -25,12 +31,6 @@ export default async function generateCode(req, res) {
 
 		if (!client || !client.data || !client.data() || !client.data().redirectURL)
 			return error(404, "Client Not Found");
-
-		if (!email || !password || !clientId || !clientSecret)
-			return error(
-				400,
-				"Incomplete information. Mandatory fields: email, password, clientId, clientSecret"
-			);
 
 		await firebase.auth().signInWithEmailAndPassword(email, password);
 		const user = firebase.auth().currentUser;
