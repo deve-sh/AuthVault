@@ -32,8 +32,7 @@ export default async function generateCode(req, res) {
 			return error(404, "Client Not Found");
 
 		let decodedCode = verifyJWT(code);
-		if (!decodedCode || !decodedCode.uid)
-			return error(403, "Unauthorized code.");
+		if (!decodedCode || !decodedCode.uid) return error(403, "Unauthorized");
 
 		let user = await firebaseAdmin.auth().getUser(decodedCode.uid);
 		user = user.toJSON();
