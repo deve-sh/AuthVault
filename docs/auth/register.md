@@ -1,4 +1,4 @@
-## User Registration Route `/register`
+## User Registration Route `POST /register`
 
 #### Example Body
 

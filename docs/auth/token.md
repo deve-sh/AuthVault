@@ -1,4 +1,4 @@
-## User Token Fetcher Route `/token`
+## User Token Fetcher Route `POST /token`
 
 #### Example Body
 
