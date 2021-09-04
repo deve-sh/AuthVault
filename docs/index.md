@@ -12,3 +12,4 @@ Routes for authentication of individual users.
 Routes for OAuth Client creation and fetching
 
 - #### [`/create`](clients/create.md)
+- #### [`/get/:clientId`](clients/get.md)
