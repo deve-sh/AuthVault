@@ -1,4 +1,4 @@
-## OAuth Single Client Deleter Route `/delete/:clientId`
+## OAuth Single Client Deleter Route `DELETE /delete/:clientId`
 
 #### Example Body
 

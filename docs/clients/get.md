@@ -1,4 +1,4 @@
-## OAuth Single Client Fetcher Route `/get/:clientId`
+## OAuth Single Client Fetcher Route `GET /get/:clientId`
 
 #### Example Body
 

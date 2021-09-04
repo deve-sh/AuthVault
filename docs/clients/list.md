@@ -1,4 +1,4 @@
-## OAuth Clients List Fetcher Route `/list`
+## OAuth Clients List Fetcher Route `GET /list`
 
 #### Example Body
 

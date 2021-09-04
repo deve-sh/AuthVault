@@ -1,4 +1,4 @@
-## OAuth Client Creator Route `/create`
+## OAuth Client Creator Route `POST /create`
 
 #### Example Body
 
