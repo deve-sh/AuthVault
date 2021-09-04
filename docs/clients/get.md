@@ -15,7 +15,7 @@
 
 #### Example Response
 
-Status Code: **200** on successful creation of OAuth Client.
+Status Code: **200** on successful fetching of OAuth Client.
 Every other status code means something went wrong.
 
 ```json
