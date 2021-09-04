@@ -13,3 +13,5 @@ Routes for OAuth Client creation and fetching
 
 - #### [`/create`](clients/create.md)
 - #### [`/get/:clientId`](clients/get.md)
+- #### [`/list`](clients/list.md)
+- #### [`/delete/:clientId`](clients/delete.md)
