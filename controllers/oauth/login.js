@@ -37,7 +37,7 @@ export default async function loginUser(req, res) {
             <form action="${nextRedirectURL}" method="POST">
                 <input type="email" placeholder="Email" name="email" required />
                 <br />
-                <input type="possword" placeholder="Password" name="password" required />
+                <input type="password" placeholder="Password" name="password" required />
                 <br />
                 <button type="submit">Login</button>
             </form>`;
