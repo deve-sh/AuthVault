@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import { sign } from "jsonwebtoken";
 
 export default function generateJWT(
 	params = {
@@ -6,7 +6,7 @@ export default function generateJWT(
 	},
 	expires
 ) {
-	return jwt.sign(
+	return sign(
 		{
 			...params,
 			exp: expires || Math.floor(Date.now() / 1000) + 60 * 60, // By default expires 1 hour from now.
