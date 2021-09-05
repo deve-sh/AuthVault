@@ -29,10 +29,12 @@ export default async function loginUser(req, res) {
 		if (!client || !client.data || !client.data() || !client.data().redirectURL)
 			return error(404, "Client Not Found");
 
+		let nextRedirectURL = `${req.baseUrl}/code?clientId=${clientId}&clientSecret=${clientSecret}`;
+
 		if (!req.session.uid) {
 			// User isn't logged in via session. Show the login form.
 			let loginHTML = `
-            <form action="/code?clientId=${clientId}&clientSecret=${clientSecret}" method="POST">
+            <form action="${nextRedirectURL}" method="POST">
                 <input type="email" placeholder="Email" name="email" required />
                 <br />
                 <input type="possword" placeholder="Password" name="password" required />
@@ -40,10 +42,7 @@ export default async function loginUser(req, res) {
                 <button type="submit">Login</button>
             </form>`;
 			return res.send(loginHTML);
-		} else
-			return res.redirect(
-				`/code?clientId=${clientId}&clientSecret=${clientSecret}`
-			);
+		} else return res.redirect(nextRedirectURL);
 	} catch (err) {
 		if (process.env.NODE_ENV !== "production") console.log(err);
 		return error(400, err.message);
