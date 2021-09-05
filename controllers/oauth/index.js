@@ -8,7 +8,7 @@ import getUserDetails from "./getUserDetails";
 const OAuthRouter = new Router();
 
 OAuthRouter.get("/login", loginUser);
-OAuthRouter.post("/code", generateCode);
+OAuthRouter.use("/code", generateCode);
 OAuthRouter.post("/getToken", getOAuthToken);
 OAuthRouter.post("/getUserDetails", getUserDetails);
 
