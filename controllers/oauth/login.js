@@ -34,7 +34,7 @@ export default async function loginUser(req, res) {
 		if (!req.session.uid) {
 			// User isn't logged in via session. Show the login form.
 			let loginHTML = `
-            <form action="${nextRedirectURL}" method="POST">
+            <form action="${nextRedirectURL}" method="post">
                 <input type="email" placeholder="Email" name="email" required />
                 <br />
                 <input type="password" placeholder="Password" name="password" required />
