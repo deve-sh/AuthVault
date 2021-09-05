@@ -8,12 +8,12 @@ export default async function loginUser(req, res) {
 			.send(message || "Something went wrong. Please try again later.");
 
 	try {
-		let { clientId, clientSecret } = req.query;
+		let { clientId } = req.query;
 
-		if (!clientId || !clientSecret)
+		if (!clientId)
 			return error(
 				400,
-				"Incomplete information. Mandatory fields: clientId, clientSecret"
+				"Incomplete information. Mandatory fields: clientId"
 			);
 
 		const client = (
@@ -21,7 +21,6 @@ export default async function loginUser(req, res) {
 				.firestore()
 				.collection("oauthclients")
 				.where("clientId", "==", clientId)
-				.where("clientSecret", "==", clientSecret)
 				.limit(1)
 				.get()
 		).docs[0];
@@ -29,7 +28,7 @@ export default async function loginUser(req, res) {
 		if (!client || !client.data || !client.data() || !client.data().redirectURL)
 			return error(404, "Client Not Found");
 
-		let nextRedirectURL = `${req.baseUrl}/code?clientId=${clientId}&clientSecret=${clientSecret}`;
+		let nextRedirectURL = `${req.baseUrl}/code?clientId=${clientId}`;
 
 		if (!req.session.uid) {
 			// User isn't logged in via session. Show the login form.

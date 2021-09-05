@@ -9,12 +9,12 @@ export default async function getUserDetails(req, res) {
 		});
 
 	try {
-		let { token, clientId, clientSecret } = req.query;
+		let { token, clientId } = req.query;
 
-		if (!token || !clientId || !clientSecret)
+		if (!token || !clientId)
 			return error(
 				400,
-				"Incomplete information. Mandatory fields: token, clientId, clientSecret"
+				"Incomplete information. Mandatory fields: token, clientId"
 			);
 
 		const client = (
@@ -22,7 +22,6 @@ export default async function getUserDetails(req, res) {
 				.firestore()
 				.collection("oauthclients")
 				.where("clientId", "==", clientId)
-				.where("clientSecret", "==", clientSecret)
 				.limit(1)
 				.get()
 		).docs[0];

@@ -11,16 +11,12 @@ export default async function generateCode(req, res) {
 
 	try {
 		let { email, password } = req.body;
-		let { clientId, clientSecret } = req.query;
+		let { clientId } = req.query;
 
-		if (
-			(!req.session.uid && (!email || !password)) ||
-			!clientId ||
-			!clientSecret
-		)
+		if ((!req.session.uid && (!email || !password)) || !clientId)
 			return error(
 				400,
-				"Incomplete information. Mandatory fields: email, password, clientId, clientSecret"
+				"Incomplete information. Mandatory fields: email, password, clientId"
 			);
 
 		const client = (
@@ -28,7 +24,6 @@ export default async function generateCode(req, res) {
 				.firestore()
 				.collection("oauthclients")
 				.where("clientId", "==", clientId)
-				.where("clientSecret", "==", clientSecret)
 				.limit(1)
 				.get()
 		).docs[0];

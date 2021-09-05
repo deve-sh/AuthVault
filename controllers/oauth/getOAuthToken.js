@@ -10,7 +10,7 @@ export default async function getOAuthToken(req, res) {
 		});
 
 	try {
-		let { code, clientId, clientSecret } = req.query;
+		let { code, clientId, clientSecret } = req.body;
 
 		if (!code || !clientId || !clientSecret)
 			return error(
