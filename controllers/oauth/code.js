@@ -43,6 +43,7 @@ export default async function generateCode(req, res) {
 			user = firebase.auth().currentUser;
 			await firebase.auth().signOut();
 			req.session.uid = user.uid;
+			req.session.save();
 		}
 
 		// User is valid.
