@@ -13,7 +13,11 @@ export default async function generateCode(req, res) {
 		let { email, password } = req.body;
 		let { clientId, clientSecret } = req.query;
 
-		if (!email || !password || !clientId || !clientSecret)
+		if (
+			(!req.session.uid && (!email || !password)) ||
+			!clientId ||
+			!clientSecret
+		)
 			return error(
 				400,
 				"Incomplete information. Mandatory fields: email, password, clientId, clientSecret"
@@ -32,15 +36,20 @@ export default async function generateCode(req, res) {
 		if (!client || !client.data || !client.data() || !client.data().redirectURL)
 			return error(404, "Client Not Found");
 
-		await firebase.auth().signInWithEmailAndPassword(email, password);
-		const user = firebase.auth().currentUser;
-		await firebase.auth().signOut();
+		let user = {};
+
+		if (!req.session.uid) {
+			await firebase.auth().signInWithEmailAndPassword(email, password);
+			user = firebase.auth().currentUser;
+			await firebase.auth().signOut();
+			req.session.uid = user.uid;
+		}
 
 		// User is valid.
 		// Generate an OAuth Code of verification for the user.
 		let codeParams = {
 			clientId,
-			uid: user.uid,
+			uid: req.session.uid || user.uid,
 			grantedAt: new Date().getTime(),
 		};
 		let codeJWT = generateJWT(
