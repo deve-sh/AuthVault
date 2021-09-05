@@ -36,7 +36,7 @@ export default async function generateCode(req, res) {
 		if (!client || !client.data || !client.data() || !client.data().redirectURL)
 			return error(404, "Client Not Found");
 
-		let user = {};
+		let user = { uid: null };
 
 		if (!req.session.uid) {
 			await firebase.auth().signInWithEmailAndPassword(email, password);
