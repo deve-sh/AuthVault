@@ -1,4 +1,3 @@
-// Generates an OAuth Code with the login credentials, takes client id and secret and sends the user to the successful redirect.
 import firebaseAdmin from "../../firebaseAdmin";
 
 export default async function loginUser(req, res) {
