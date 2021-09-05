@@ -15,6 +15,7 @@
     "dotenv": "^10.0.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
     "firebase": "^8.8.1",
     "firebase-admin": "^9.11.0",
     "helmet": "^4.6.0",
