@@ -6,12 +6,17 @@ export default function generateJWT(
 	},
 	expires
 ) {
-	return sign(
-		{
-			...params,
-			exp: expires || Math.floor(Date.now() / 1000) + 60 * 60, // By default expires 1 hour from now.
-		},
-		process.env.JWT_SECRET,
-		{ algorithm: "RS256" }
-	);
+	try {
+		const jwt = sign(
+			{
+				...params,
+				exp: expires || Math.floor(Date.now() / 1000) + 60 * 60, // By default expires 1 hour from now.
+			},
+			process.env.JWT_SECRET
+		);
+		return jwt;
+	} catch (err) {
+		console.log(err);
+		return null;
+	}
 }
