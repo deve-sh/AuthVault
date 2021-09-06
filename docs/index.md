@@ -15,3 +15,12 @@ Routes for OAuth Client creation and fetching
 - #### [`/get/:clientId`](clients/get.md)
 - #### [`/list`](clients/list.md)
 - #### [`/delete/:clientId`](clients/delete.md)
+
+## `/oauth`
+
+Routes for OAuth Authentication of Users
+
+- #### [`/login`](oauth/login.md)
+- #### [`/code`](oauth/code.md)
+- #### [`/getToken`](oauth/getToken.md)
+- #### [`/getUserDetails`](oauth/getUserDetails.md)
