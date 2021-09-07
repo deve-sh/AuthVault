@@ -10,10 +10,7 @@ export default async function loginUser(req, res) {
 		let { clientId } = req.query;
 
 		if (!clientId)
-			return error(
-				400,
-				"Incomplete information. Mandatory fields: clientId"
-			);
+			return error(400, "Incomplete information. Mandatory fields: clientId");
 
 		const client = (
 			await firebaseAdmin
@@ -32,11 +29,17 @@ export default async function loginUser(req, res) {
 		if (!req.session.uid) {
 			// User isn't logged in via session. Show the login form.
 			let loginHTML = `
-            <form action="${nextRedirectURL}" method="post">
+            <form action="${nextRedirectURL}" style="text-align: center;" method="post">
+				<h3>${client.data().name}</h3>
+				<p>Wants to access your basic information like email and name</p>
+				<p>Login to Your Account to provide the access.</p>
+				<br />
                 <input type="email" placeholder="Email" name="email" required />
                 <br />
+				<br />
                 <input type="password" placeholder="Password" name="password" required />
                 <br />
+				<br />
                 <button type="submit">Login</button>
             </form>`;
 			return res.send(loginHTML);
