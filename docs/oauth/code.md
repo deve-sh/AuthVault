@@ -2,7 +2,7 @@
 
 #### Example Query Params
 
-```json
+```
 ?clientId=<Your Client ID Here>
 ```
 
